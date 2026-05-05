@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+vars:
+  BOARD: arduino:avr:pro
+  PORT: /dev/ttyACM0
+  BINDIR: ./binary
+  OBJDIR: ./obj
+  ACLI: /home/pirahna/programs/arduino-ide_2.3.8_Linux_64bit/resources/app/lib/backend/resources/arduino-cli
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  compile:
+    desc: Compile current project
+    cmds:
+      - |
+        {{.ACLI}} compile --fqbn {{.BOARD}} \
+          --port {{.PORT}} --jobs 0 \
+          --build-path {{.OBJDIR}} \
+          --output-dir {{.BINDIR}} \
+          --build-properties build.cppflags="-std=gnu++11" .
+    silent: true
+
+  upload:
+    desc: Compile and Upload current project
+    cmds:
+      - |
+        {{.ACLI}} compile --clean --fqbn {{.BOARD}} \
+          --port {{.PORT}} --jobs 0 --build-path {{.OBJDIR}} \
+          --output-dir {{.BINDIR}} --upload \
+          --build-properties build.cppflags="-std=gnu++11" .
+    silent: true

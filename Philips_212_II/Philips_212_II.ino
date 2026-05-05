@@ -1,52 +1,29 @@
-#include <stdint.h>
+#include <Arduino.h>
 
-#define AIN_PHOTO 14
-#define AIN_33TRIM 15
-#define AIN_45TRIM 16
+#include "appstate.h"
 
-#define DIN_SEN45 4
-#define DIN_SENOFF 6
-#define DIN_SEN33 8
-#define DIN_TACHO 10
-
-#define DOUT_LED45 5
-#define DOUT_LEDOFF 7
-#define DOUT_LED33 9
-
-#define PWM_MOTOR 11
-
-#define ADC_RESOLUTION 10
+#include "task_leds.h"
+#include "task_autostop.h"
+#include "task_shell.h"
+#include "task_speed.h"
+#include "task_buttons.h"
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("Philips GA212 firmware. April 2026");
-
   analogReference(DEFAULT);
 
-  pinMode(DIN_SEN45, INPUT);
-  pinMode(DIN_SENOFF, INPUT);
-  pinMode(DIN_SEN33, INPUT);
-  pinMode(DIN_TACHO, INPUT);  // ??
-  Serial.println("digital inputs configured");
+  status_init();
 
-  // initialize before set as output removes blinking on the start
-  digitalWrite(DOUT_LED45, HIGH);
-  digitalWrite(DOUT_LEDOFF, LOW);
-  digitalWrite(DOUT_LED33, HIGH);
-  Serial.println("digital outputs initialized");
-
-  pinMode(DOUT_LED45, OUTPUT);
-  pinMode(DOUT_LEDOFF, OUTPUT);
-  pinMode(DOUT_LED33, OUTPUT);
-  Serial.println("digital outputs configured");
+  task_leds_init();
+  task_autostop_init();
+  task_speed_init();
+  task_buttons_init();
+  task_shell_init();
 }
 
 void loop() {
-  Serial.print("33.3 RPM voltage is: ");
-  Serial.println(analogRead(AIN_33TRIM));
-
-  Serial.print("45 RPM voltage is: ");
-  Serial.println(analogRead(AIN_45TRIM));
-
-  delay(1000);
+  task_leds_loop();
+  task_autostop_loop();
+  task_speed_loop();
+  task_buttons_loop();
+  task_shell_loop();
 }
