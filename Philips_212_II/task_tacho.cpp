@@ -5,11 +5,11 @@
 #include <PinChangeInterruptPins.h>
 #include <PinChangeInterruptSettings.h>
 
-#include "../hardware.h"
-#include "../appstate.h"
-#include "../functional.h"
+#include "hardware.h"
+#include "appstate.h"
+#include "functional.h"
 
-#include "../task_tacho.h"
+#include "task_tacho.h"
 
 volatile unsigned long pulse_last_interrupt_us = 0;
 

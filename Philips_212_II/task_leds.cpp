@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
-#include "../hardware.h"
-#include "../appstate.h"
+#include "hardware.h"
+#include "appstate.h"
 
-#include "../task_leds.h"
+#include "task_leds.h"
 
 void task_leds_init() {
   digitalWrite(DOUT_LED45, HIGH);

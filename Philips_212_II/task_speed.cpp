@@ -12,86 +12,61 @@
 
 S_MODE previous = S_MODE::OFF;
 
-/* PID controller will take tacho period as input and 
-  return PWM value as output. this is reverse direction, as 
-  increasing PWM will increase a frequency and decrease 
-  tacho period.
+// Factor that turns velocity into a number that looks like RPMs. Set by trying values while measuring turntable with a separate tachometer.
+// The higher the value, the slower the motor spins
+constexpr float VEL_FACTOR = 0.846798789f;
+// Motor velocity target values for 33RPM and 45RPM
+constexpr float TARGET_VEL_33 = 100.f * (100.0f / 3.f);
+constexpr float TARGET_VEL_45 = 100.f * 45.f;
 
-  target point for 33 and for 45 RPM will be taken from 
-  configuration. potentiometer will add ~ +/- 10% tune
- */
+class VelocitySource {
+public:
+  float get(const float period) const {
+    return m_multiplier * m_velocityFactor / period;
+  }
 
-/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=
- * MATH:
- * D = 155mm - diameter of the big disk
- * d = 13mm  - diameter of the motor
- * N - RPM of the big disk
- * n - RPM of the small disk
- *
- * l = pi * diameter - length of the circle
- *
- * big disk per minute should rotate length of the belt:
- * 
- * L = N * pi * D
- *
- * the same length should rotate the motor, but 'n' will be higher, as
- * 'd' is smaller
- *
- * N * pi * D = n * pi * d => n = N * D / d
- *
- * frequency is a rotations per second:
- *
- * f = n / 60 = N * D / (d * 60.)
- *
- * period of the motor:
- *
- * t = 1 / f = d * 60. / N * D = 0.15098284021950584 sec
- * T = 60. / 33.33 = 1.8001800 sec
- *
- * or just simple:
- * T = 60.0 / N
- * t = T * (d/D)
- * 
- * tacho gives 6 periods per rotation.
- */
-constexpr float PLATE_DISK_DIAMETER_MM = 155.0f;
-constexpr float MOTOR_AXIS_DIAMETER_MM = 13.0f;
-constexpr float MOTOR_PERIODS_PER_ROTATION = 6.0f;
+private:
+  const float m_multiplier { 1e8 };
+  const float m_velocityFactor { VEL_FACTOR };
+};
 
-constexpr float calc_tacho_frequency(const float plate_rpm) {
-  return 1.0                                            // sec -> 10*N ms. just better fopr PID 
-    * MOTOR_PERIODS_PER_ROTATION                          // motor tacho has 6 evolitions per round
-    * (plate_rpm / 60.0f)                                 // RPM -> rotation per second = freq Hz
-    * (PLATE_DISK_DIAMETER_MM / MOTOR_AXIS_DIAMETER_MM);  // plate loops -> motor loops
-}
-constexpr float freq33 = calc_tacho_frequency(100.f/3.f); // 100.0/3. = 33.33(33)
-constexpr float freq45 = calc_tacho_frequency(45.f);      // 45
-constexpr unsigned long initial_period_us = 150000;       // after reaching this period, PID will come into the game
+class ExpFilteredVelocitySource {
+public:
+  ExpFilteredVelocitySource(const float alpha) : m_alpha(alpha)
+  {}
 
-inline float calc_period_frequency(uint16_t period) {
-  return 1.0f                                           // sec -> 10*N ms. just better fopr PID 
-    * (1000000.0f / period);                              // period us -> freq Hz
-}
+  float get(const float period) {
+    float tmp = m_source.get(period);
+    if (!m_first) {
+      m_filteredValue = m_alpha * tmp + (1 - m_alpha) * m_filteredValue;
+    }
+    else {
+      m_filteredValue = tmp;
+      m_first = false;
+    }
+    return m_filteredValue;
+  }
+  void reset() {
+    m_filteredValue = 0.f;
+    m_first = true;
+  }
+private:
+  bool m_first = false;
+  float m_filteredValue = 0.f;
+  const float m_alpha;
 
-// #define PERIOD_TO_FREQ(PERIOD_US) (1000000.0f / PERIOD_US)
+  VelocitySource m_source;
+};
+
+ExpFilteredVelocitySource currentVelocity(0.025);
+
 
 // these values are for input-output of the PID
 float pidSetpoint = 0.f, pidInput = 0.f, pidOutput = 0.f;
 QuickPID motorPid(&pidInput, &pidOutput, &pidSetpoint);
 
-template<uint8_t percent>
-constexpr float get_range_min() { return 1.0f - 1.0f * percent / 200.f;}
-
-template<uint8_t percent>
-constexpr float get_range_len() { return 1.f * percent / 100.f; }
-
-template<uint8_t percent>                                                         
-constexpr float get_pid_setpoint_(int pot_value, float freq_base) {
-  return freq_base * (get_range_min<percent>() +
-    get_range_len<percent>() * pot_value / 1023.0f);
-}
-constexpr float get_pid_setpoint(int pot_value, float freq_base) {
-    return get_pid_setpoint_<20>(pot_value, freq_base);
+float trim_amount(int pot_value, float freq_base) {
+    return freq_base * map(pot_value, 1023, 0, -512, 512) / 512;
 }
 
 // -=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=-=*^*=
@@ -99,11 +74,11 @@ constexpr float get_pid_setpoint(int pot_value, float freq_base) {
 void task_speed_init() {
   // Set up PID speed control
   motorPid.SetTunings(get_config()->Kp, get_config()->Ki, get_config()->Kd);
-  motorPid.SetOutputLimits(0, 255);
-  motorPid.SetControllerDirection(motorPid.Action::reverse);
-  // motorPid.SetAntiWindupMode(motorPid.iAwMode::iAwOff);
+  motorPid.SetOutputLimits(10, 250);
+  motorPid.SetAntiWindupMode(motorPid.iAwMode::iAwClamp);
   motorPid.SetSampleTimeUs(2000);
   motorPid.SetMode(motorPid.Control::automatic);
+  motorPid.SetControllerDirection(motorPid.Action::direct);
 
   // 25 KHz for PWM silence. PIN11, Timer2, Prescaler = 1
   TCCR2B = (TCCR2B & 0b11111000) | 0x01;
@@ -121,13 +96,14 @@ void task_speed_loop() {
       // but i can set some dummy input and wait for a while to let the motor get the 
       // initial speed. PID will calculate the changes speed based on it's internal timer
       if (g_status.mode == S_MODE::RPM33) {
-        pidSetpoint = freq33;
+        pidSetpoint = TARGET_VEL_33;
       }
       else if (g_status.mode == S_MODE::RPM45) {
-        pidSetpoint = freq45;
+        pidSetpoint = TARGET_VEL_45;
       }
+
       initial_start = true;
-      pidInput = pidSetpoint * 1.5;
+      currentVelocity.reset();
       play_mode_switch_ms = millis();
     }
     else {                          // don't let to switch between the 33/44 without stop
@@ -141,41 +117,34 @@ void task_speed_loop() {
     analogWrite(PWM_MOTOR, 0);
   }
   else if (initial_start) {
-    // start before everything will be controlle dby PID
-    if (millis() - play_mode_switch_ms < 1000) {
-      analogWrite(PWM_MOTOR, 250);
+    // start before everything will be controlled by PID
+    if (millis() - play_mode_switch_ms < 800) {
+      analogWrite(PWM_MOTOR, 200);
     }
     else {
       initial_start = false;
-      motorPid.SetOutputLimits(10.f, 100.f);
     }
   }
   else {
     // set PID setpoint
     if (g_status.mode == S_MODE::RPM33) {
-      pidSetpoint = get_pid_setpoint(analogRead(AIN_33TRIM), freq33);
+      pidSetpoint = TARGET_VEL_33 + trim_amount(analogRead(AIN_33TRIM), TARGET_VEL_33);
     }
     else if (g_status.mode == S_MODE::RPM45) {
-      pidSetpoint = get_pid_setpoint(analogRead(AIN_45TRIM), freq45);
+      pidSetpoint = TARGET_VEL_45 + trim_amount(analogRead(AIN_45TRIM), TARGET_VEL_45);
     }
 
-    pidInput = calc_period_frequency(g_status.pulse_period_us);
+    pidInput = currentVelocity.get(g_status.pulse_period_us);
 
-    bool changed = motorPid.Compute();
-    if (!changed) {
+    if (motorPid.Compute()) {
       if (log_speed()) {
-        Serial.println(F("PWM stays intact"));
-      }
-    }
-    else {
-      if (log_speed()) {
-        Serial.print(F("Set: ")); Serial.print(pidSetpoint, 2);
-        Serial.print(F(" Hz, In: ")); Serial.print(pidInput, 2);
-        Serial.print(F(" Hz, PWM: ")); Serial.println(pidOutput, 2);
+        Serial.print(pidSetpoint, 2);
+        Serial.print(F(" , "));
+        Serial.print(pidInput, 2);
+        Serial.print(F(" , "));
+        Serial.println(pidOutput, 0);
       }
       analogWrite(PWM_MOTOR, static_cast<int>(pidOutput));
     }
   }
 }
-
-  

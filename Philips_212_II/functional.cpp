@@ -2,7 +2,7 @@
 
 #include <limits.h>
 
-#include "../functional.h"
+#include "functional.h"
 
 unsigned long duration(unsigned long start, unsigned long end) {
   return (end >= start)

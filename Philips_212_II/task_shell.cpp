@@ -52,11 +52,11 @@ void print_configuration() {
   Serial.print(F(", log: "));
   Serial.print(get_config()->debug_mask);
   Serial.print(F(", PID P="));
-  Serial.print(get_config()->Kp);
+  Serial.print(get_config()->Kp, 4);
   Serial.print(F(" I="));
-  Serial.print(get_config()->Ki);
+  Serial.print(get_config()->Ki, 4);
   Serial.print(F(" D="));
-  Serial.print(get_config()->Kd);
+  Serial.print(get_config()->Kd, 4);
   Serial.println();
 }
 

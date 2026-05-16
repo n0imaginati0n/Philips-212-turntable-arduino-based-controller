@@ -2,11 +2,11 @@
 #include <stdint.h>
 #include <Arduino.h>
 
-#include "../hardware.h"
-#include "../appstate.h"
-#include "../functional.h"
+#include "hardware.h"
+#include "appstate.h"
+#include "functional.h"
 
-#include "../task_autostop.h"
+#include "task_autostop.h"
 
 /*
   as higher the input value, as closer we to stop position. i.e. there is 

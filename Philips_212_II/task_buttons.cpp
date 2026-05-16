@@ -5,11 +5,11 @@
 
 #include <Arduino.h>
 
-#include "../hardware.h"
-#include "../appstate.h"
-#include "../functional.h"
+#include "hardware.h"
+#include "appstate.h"
+#include "functional.h"
 
-#include "../task_buttons.h"
+#include "task_buttons.h"
 
 #define PRESSED_STOP        1
 #define PRESSED_33RPM       (1 << 1)
