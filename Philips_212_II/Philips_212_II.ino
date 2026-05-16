@@ -7,6 +7,7 @@
 #include "task_shell.h"
 #include "task_speed.h"
 #include "task_buttons.h"
+#include "task_tacho.h"
 
 void setup() {
   analogReference(DEFAULT);
@@ -18,12 +19,18 @@ void setup() {
   task_speed_init();
   task_buttons_init();
   task_shell_init();
+  task_tacho_init();
 }
 
 void loop() {
-  task_leds_loop();
-  task_autostop_loop();
-  task_speed_loop();
   task_buttons_loop();
-  task_shell_loop();
+  task_autostop_loop(); // autostop can overcome the buttons
+  task_leds_loop();     // leds should display actual state
+
+  task_tacho_loop();
+  task_speed_loop();    // motor works as it defined earlier
+
+  // asynchronous, not related to the order as it offers no 
+  // possibility to modify the state or measured values
+  task_shell_loop();    
 }

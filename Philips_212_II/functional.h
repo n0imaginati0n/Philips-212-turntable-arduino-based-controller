@@ -1,5 +1,5 @@
-#ifndef _FUCNTIONAL_H
-#define _FUCNTIONAL_H
+#ifndef _FUNCTIONAL_H
+#define _FUNCTIONAL_H
 
 /** this function calculates correct duration value. 
   result of micros() overloads ~ every 70 min. i.e. can 
@@ -10,8 +10,11 @@
   Of course this function will not properly handle long delays. 
   but the skew can happen even in a very small interval.
 */
-unsigned long duration_micros(unsigned long start);
-
 unsigned long duration(unsigned long start, unsigned long end);
 
-#endif // _FUCNTIONAL_H
+#endif // _FUNCTIONAL_H
+
+template<typename T, unsigned size>
+constexpr unsigned arr_size(T(&)[size]) noexcept {
+  return size;
+}

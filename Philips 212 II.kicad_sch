@@ -1378,6 +1378,174 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_Schottky_Small"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at -1.27 2.032 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "D_Schottky_Small"
+				(at -7.112 -2.032 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Schottky diode, small symbol"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode Schottky"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "D_Schottky_Small_0_1"
+				(polyline
+					(pts
+						(xy -1.27 0.762) (xy -1.27 1.016) (xy -0.762 1.016) (xy -0.762 -1.016) (xy -0.254 -1.016) (xy -0.254 -0.762)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.016) (xy -0.762 0) (xy 0.762 1.016) (xy 0.762 -1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_Schottky_Small_1_1"
+				(pin passive line
+					(at -2.54 0 0)
+					(length 1.778)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 0 180)
+					(length 1.778)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:D_Small"
 			(pin_numbers
 				(hide yes)
@@ -5380,39 +5548,6 @@
 		)
 		(uuid "2db5809f-29f6-4677-a217-3e3af31d5686")
 	)
-	(text "MOTOR +"
-		(exclude_from_sim no)
-		(at 262.89 127 0)
-		(effects
-			(font
-				(size 1.778 1.5113)
-			)
-			(justify left bottom)
-		)
-		(uuid "58d73fd1-2b3d-4d8d-81d1-48e0c56fd94f")
-	)
-	(text "MOTOR-"
-		(exclude_from_sim no)
-		(at 262.89 130.81 0)
-		(effects
-			(font
-				(size 1.778 1.5113)
-			)
-			(justify left bottom)
-		)
-		(uuid "88b319d1-f030-42ca-91a3-a21232d49196")
-	)
-	(text "TACH INPUT"
-		(exclude_from_sim no)
-		(at 262.89 123.19 0)
-		(effects
-			(font
-				(size 1.778 1.5113)
-			)
-			(justify left bottom)
-		)
-		(uuid "93fc3cf4-5dc4-487d-88b5-53eaa3ff44a6")
-	)
 	(text "PHOTO LED -"
 		(exclude_from_sim no)
 		(at 262.89 95.25 0)
@@ -5423,6 +5558,16 @@
 			(justify left bottom)
 		)
 		(uuid "9ccd6996-d1e7-45bd-bf21-a09e073d5a0f")
+	)
+	(text "BROWN\n\nBLACK\n\nRED\n\nYELLOW"
+		(exclude_from_sim no)
+		(at 265.43 125.73 0)
+		(effects
+			(font
+				(size 1.016 1.016)
+			)
+		)
+		(uuid "b07c3728-96d1-406f-b6e5-95e3491b85b8")
 	)
 	(text "PHOTO LED +"
 		(exclude_from_sim no)
@@ -5458,12 +5603,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0ada7517-6fd7-45bf-8133-73f62c328aa6")
-	)
-	(junction
-		(at 86.36 167.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1f047a38-8474-4d58-8a5d-e5933b19939c")
 	)
 	(junction
 		(at 60.96 77.47)
@@ -5574,12 +5713,6 @@
 		(uuid "71e2d7b1-e2ff-4148-a588-9cec9b10d041")
 	)
 	(junction
-		(at 240.03 137.16)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "72dd1b7c-0c5a-4915-bb17-6d8fd6780cb9")
-	)
-	(junction
 		(at 152.4 153.67)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5626,6 +5759,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "94c1f4ee-4a7a-4fbd-9408-ff63da3b71f9")
+	)
+	(junction
+		(at 240.03 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "95583e43-648d-4988-8b19-39b9e761a0d2")
 	)
 	(junction
 		(at 167.64 82.55)
@@ -6463,7 +6602,7 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 167.64) (xy 99.06 167.64)
+			(xy 83.82 167.64) (xy 99.06 167.64)
 		)
 		(stroke
 			(width 0)
@@ -6801,16 +6940,6 @@
 		)
 		(uuid "41c960e4-3f12-468c-9b1b-5627fdf31a4f")
 	)
-	(wire
-		(pts
-			(xy 83.82 167.64) (xy 86.36 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "41caef93-0f9a-4e98-a7e9-2f7306423699")
-	)
 	(bus
 		(pts
 			(xy 101.6 133.35) (xy 101.6 165.1)
@@ -7123,6 +7252,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 138.43) (xy 240.03 139.7)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "59dbd80c-9e20-4ce9-969a-719a047f723c")
+	)
+	(wire
+		(pts
 			(xy 30.48 77.47) (xy 30.48 80.01)
 		)
 		(stroke
@@ -7250,16 +7389,6 @@
 			(type default)
 		)
 		(uuid "65faa863-f9e2-47b9-ac7d-d5166763b8ff")
-	)
-	(wire
-		(pts
-			(xy 240.03 137.16) (xy 240.03 139.7)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "66afad5b-ddd3-4eff-b47f-ab98c5edf6bf")
 	)
 	(wire
 		(pts
@@ -8153,6 +8282,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 134.62) (xy 240.03 138.43)
+		)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(uuid "bf68b81a-69c5-428e-9df1-8b7742794550")
+	)
+	(wire
+		(pts
 			(xy 158.75 152.4) (xy 158.75 153.67)
 		)
 		(stroke
@@ -8183,7 +8322,7 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 137.16) (xy 256.54 129.54)
+			(xy 256.54 138.43) (xy 256.54 129.54)
 		)
 		(stroke
 			(width 0.1524)
@@ -8223,16 +8362,6 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 134.62) (xy 240.03 137.16)
-		)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(uuid "c8e6f050-541d-4554-b420-ab5c29029f16")
-	)
-	(wire
-		(pts
 			(xy 167.64 80.01) (xy 167.64 82.55)
 		)
 		(stroke
@@ -8263,7 +8392,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 104.14) (xy 191.77 104.14)
+			(xy 189.23 104.14) (xy 194.31 104.14)
 		)
 		(stroke
 			(width 0)
@@ -8430,16 +8559,6 @@
 			(type default)
 		)
 		(uuid "db8e1137-bff0-402d-b60c-d7ea6bb57280")
-	)
-	(wire
-		(pts
-			(xy 86.36 179.07) (xy 86.36 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dbb51254-1866-4141-9b24-3996e13f4557")
 	)
 	(wire
 		(pts
@@ -8683,7 +8802,7 @@
 	)
 	(wire
 		(pts
-			(xy 240.03 137.16) (xy 256.54 137.16)
+			(xy 240.03 138.43) (xy 256.54 138.43)
 		)
 		(stroke
 			(width 0.1524)
@@ -8753,16 +8872,6 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 167.64) (xy 86.36 173.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fcb20fe1-4dfb-42e0-9b6e-f4d881be7c87")
-	)
-	(wire
-		(pts
 			(xy 240.03 154.94) (xy 240.03 156.21)
 		)
 		(stroke
@@ -8822,7 +8931,7 @@
 		(uuid "10867ff3-5f46-4198-b416-32db6efd9131")
 	)
 	(label "motor_pwm"
-		(at 243.84 137.16 0)
+		(at 243.84 138.43 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9572,7 +9681,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "2.2M"
+		(property "Value" "10M"
 			(at 138.43 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9873,83 +9982,6 @@
 			(project "Philips 212 II"
 				(path "/7f4302fc-61d1-4612-beb7-75bcb42f7120"
 					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 86.36 184.15 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "0ea34667-4707-4620-acf4-2043a379fca7")
-		(property "Reference" "#PWR014"
-			(at 86.36 190.5 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 86.36 189.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 86.36 184.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 86.36 184.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 86.36 184.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "db2fca5c-e20e-4fbb-a983-d3562b0afc4f")
-		)
-		(instances
-			(project "Philips 212 II"
-				(path "/7f4302fc-61d1-4612-beb7-75bcb42f7120"
-					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -11282,7 +11314,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "2.2M"
+		(property "Value" "10M"
 			(at 163.83 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13472,109 +13504,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4148WS")
-		(at 195.58 104.14 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "782a7057-7ce6-4a87-afbb-14db1df03e01")
-		(property "Reference" "D10"
-			(at 194.31 107.95 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "1N4148"
-			(at 193.04 110.49 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.0795)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_MELF_Handsoldering"
-			(at 195.58 108.585 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/85751/1n4148ws.pdf"
-			(at 195.58 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "75V 0.15A Fast switching Diode, SOD-323"
-			(at 195.58 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Device" "D"
-			(at 195.58 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 195.58 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "6e4a1d66-6d2d-4f9d-a740-de30d37a1bb8")
-		)
-		(pin "1"
-			(uuid "bcfc0e20-3fe6-4f44-9d46-65379b9dea44")
-		)
-		(instances
-			(project "Philips 212 II"
-				(path "/7f4302fc-61d1-4612-beb7-75bcb42f7120"
-					(reference "D10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 53.34 124.46 0)
 		(unit 1)
@@ -15370,6 +15299,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_Schottky_Small")
+		(at 196.85 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a8a0be57-8b62-4c31-abc7-57ffce72ffa4")
+		(property "Reference" "D11"
+			(at 196.85 106.68 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BAT46"
+			(at 196.85 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal"
+			(at 196.85 104.14 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 196.85 104.14 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Schottky diode, small symbol"
+			(at 196.85 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "16389fc6-aeca-40cb-b08e-638e6203f534")
+		)
+		(pin "2"
+			(uuid "d50c1e4a-6b17-463b-ac53-75613abeb310")
+		)
+		(instances
+			(project "Philips 212 II"
+				(path "/7f4302fc-61d1-4612-beb7-75bcb42f7120"
+					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 152.4 148.59 0)
 		(mirror y)
@@ -16289,7 +16297,7 @@
 		(dnp no)
 		(uuid "c0fde13a-e220-418d-945f-2ce48c1a6508")
 		(property "Reference" "J7"
-			(at 260.35 132.08 90)
+			(at 261.62 133.35 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16300,7 +16308,7 @@
 			)
 		)
 		(property "Value" "MOTOR"
-			(at 262.89 134.62 90)
+			(at 265.43 135.89 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -17033,7 +17041,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "2.2M"
+		(property "Value" "10M"
 			(at 151.13 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17505,88 +17513,6 @@
 			(project "Philips 212 II"
 				(path "/7f4302fc-61d1-4612-beb7-75bcb42f7120"
 					(reference "HS1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 86.36 176.53 0)
-		(mirror y)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "eae214f6-b09a-4006-8f7d-4dcfbb6536a4")
-		(property "Reference" "C8"
-			(at 85.09 171.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "0.1u"
-			(at 85.09 173.99 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 86.36 176.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 86.36 176.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 86.36 176.53 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "20341c19-9b26-436d-a458-3ce227360440")
-		)
-		(pin "1"
-			(uuid "93890ead-f11e-4366-9ab5-e26848bd9c64")
-		)
-		(instances
-			(project "Philips 212 II"
-				(path "/7f4302fc-61d1-4612-beb7-75bcb42f7120"
-					(reference "C8")
 					(unit 1)
 				)
 			)
